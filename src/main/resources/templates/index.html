@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="~{ base :: layout(~{::title} , ~{::section}) }">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Index Page</title>
+</head>
+
+<body>
+
+	<section>
+		<div class="container p-5">
+			<div class="row">
+				<div class="col-md-20 offset-md-0">
+					<div class="card">
+						<div class="card-header text-center fs-4">Employee Details</div>
+							<th:block th:if = "${session.msg}">
+								<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+								<th:block th:text="${@empServiceImpl.removeSessionMassage}" ></th:block>	
+							</th:block>
+
+						<div class="card-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Id</th>
+										<th scope="col">Name</th>
+										<th scope="col">Email</th>
+										<th scope="col">Address</th>
+										<th scope="col">Gender</th>
+										<th scope="col">Password</th>
+										<th scope="col">Image</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="e:${empList}">
+										<th scope="row">[[${e.id}]]</th>
+										<th>[[${e.name}]]</th>
+										<th>[[${e.email}]]</th>
+										<th>[[${e.address}]]</th>
+										<th>[[${e.gender}]]</th>
+										<th>[[${e.password}]]</th>
+									  	<th><img th:src="@{'img/'+${e.imageName}}" width="100%" height="100px"></th>
+										<td>
+											<a th:href="@{'EditEmp/'+${e.id}}" class="btn btn-sm btn-primary">Edit</a>
+											<a th:href="@{'deleteEmp/'+${e.id}}" class="btn btn-sm btn-danger">Delete</a> 
+										</td>
+										
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+
+</html>
